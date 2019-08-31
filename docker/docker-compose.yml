@@ -1,0 +1,45 @@
+version: "2"
+services:
+  mysql5.7:
+    # mysql容器名称
+    container_name: mysql5.7
+    # 使用的镜像
+    image: mysql5.7
+    build:
+      # mysqlDockerfile所在位置  .表示当前目录
+      context: .
+        # mysql 使用的Dockerfile文件名
+      dockerfile: Dockerfile.mysql5.7
+    ports:
+      # 数据库宿主机与镜像端口号映射
+      - "3306:3306"
+    volumes:
+      # mysql数据挂载到宿主机目录
+      - /data/mysql/data:/var/lib/mysql
+      # mysql配置挂载到宿主机目录
+      - /data/mysql/conf.d:/etc/mysql/conf.d
+    command:
+      # mysql配置
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_general_ci
+      --explicit_defaults_for_timestamp=true
+      --lower_case_table_names=1
+      --max_allowed_packet=128M
+      --sql-mode="STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION,ONLY_FULL_GROUP_BY"
+    environment:
+      # 创建用户
+      - MYSQL_USER=cleancode
+      # 用户密码
+      - MYSQL_PASSWORD=root
+      # root密码
+      - MYSQL_ROOT_PASSWORD=root
+      # 创建数据库
+      - MYSQL_DATABASE=babasport
+      # 创建数据库
+      - MYSQL_DATABASE=e3mall
+    # 给容器加上特定权限
+    privileged: true
+
+
+
+

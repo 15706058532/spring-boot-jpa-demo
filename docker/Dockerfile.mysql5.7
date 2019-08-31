@@ -1,0 +1,14 @@
+FROM mysql:5.7
+
+# 把要执行的sql文件放到/docker-entrypoint-initdb.d/目录下，容器会自动执行这个sql
+COPY babasport.sql /docker-entrypoint-initdb.d/babasport.sql
+COPY e3mall.sql /docker-entrypoint-initdb.d/e3mall.sql
+
+# 把mysql的配置添加到容器
+COPY my.cnf /etc/mysql
+
+#给执行文件增加可执行权限
+RUN chmod a+x /docker-entrypoint-initdb.d/babasport.sql
+RUN chmod a+x /docker-entrypoint-initdb.d/e3mall.sql
+
+
