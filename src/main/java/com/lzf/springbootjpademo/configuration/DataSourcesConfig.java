@@ -50,6 +50,13 @@ public class DataSourcesConfig {
         return new DruidDataSource();
     }
 
+    @Bean(name = "quaternaryDataSource")
+    @Qualifier("quaternaryDataSource")
+    @ConfigurationProperties(prefix = "spring.datasource.quaternary")
+    public DataSource quaternaryDataSource() {
+        return new DruidDataSource();
+    }
+
 
     /**
      * druid监控配置

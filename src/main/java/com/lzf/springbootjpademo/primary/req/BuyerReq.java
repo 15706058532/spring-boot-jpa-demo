@@ -327,7 +327,7 @@ public class BuyerReq implements Serializable {
         return pageSize;
     }
 
-    public void setOrderByClause(Integer orderByClause) {
+    public void setOrderByClause(Integer orderByClause, String s) {
         this.orderByClause = orderByClause;
     }
 
